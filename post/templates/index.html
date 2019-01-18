@@ -1,0 +1,91 @@
+{%load staticfiles%}
+<head>
+
+   <style type="text/css">
+h3{
+color:white;
+font-size: 20px;
+    text-align: center;
+background-color: #305A72;
+min-height: 30px;
+
+}
+h1{
+color:white;
+font-size: 80px;
+    text-align: center;
+background-color: #305A72;
+min-height: 80px;
+
+}
+small{
+color:#305A72;
+font-size: 20px;
+    text-align: center;
+min-height: 60px;
+
+}
+.button {
+ display: block;
+ height: 100px;
+ width: 300px;
+ background: #34696f;
+ border: 2px solid rgba(33, 68, 72, 0.59);
+}
+.list{
+    padding:10;
+    margin:210px;
+    margin-top: 80px;
+    list-style:none;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+            <h1><big>My Blog</big></h1>
+
+
+{% block content %}
+<div class ="list">
+
+
+{%for obj in post_list%}
+
+  <div class ="post">
+            <h3><big>{{obj.title}}</big></h3>
+            <small>{{obj.timesstamp|timesince}} ago</small>
+            <p>{{obj.content|safe|truncatechars:320}}</p>
+      <button onlick="#"><a href='/{{obj.id}}'> View</a></button>
+
+
+</div>
+
+
+
+
+{% endfor %}
+
+</div>>
+
+{% endblock content %}
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+
+        {% if  object_list.has_next %}
+            <a href="?page={{  object_list.next_page_number }}">next</a>
+            <a href="?page={{  object_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+
